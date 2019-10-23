@@ -12,11 +12,11 @@ for resource in package.resources:
         data=resource.read()
 
 investement=3000
-big_emergency_frequency=25
-small_emergency_frequency=13
+big_emergency_frequency=30
+small_emergency_frequency=12
 period=12*30
-emergency_size=26000
-big_emergency_size=20000
+emergency_size=21000
+big_emergency_size=15000
 small_emergency_size=6000
 result=[]
 for i in range(len(data)-period):
@@ -45,9 +45,10 @@ for i in range(len(data)-period):
     result.append([data[i][0], invested, saving+saving_invested, invested-saving-saving_invested])
 result=array(result)
 print('min:\t{:.2f}\t{:.2f}'.format(min(result[:,1]),min(result[:,2])))
-print('average:\t{:.2f}\t{:.2f}'.format(np.mean(result[:,1]),np.mean(result[:,2])))
+print('mean:\t{:.2f}\t{:.2f}'.format(np.mean(result[:,1]),np.mean(result[:,2])))
 print('median:\t{:.2f}\t{:.2f}'.format(np.median(result[:,1]),np.median(result[:,2])))
-
+print('low 5%:\t{:.2f}\t{:.2f}'.format(np.percentile(result[:,1],5),np.percentile(result[:,2],5)))
+print('saver wins:\t{:.2f}%'.format(float(np.where(result[:,3] < 0.0)[0].size)/result[:,3].size*100))
 
 
 
